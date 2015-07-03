@@ -17,7 +17,7 @@ import android.widget.ImageView;
  */
 public class HomeScreenBitmap extends ImageView implements View.OnTouchListener {
     public Context mycontext;
-    public Intent danceDrumIntent,funkDrumIntent,electroDrumIntent,i4;
+    public Intent danceDrumIntent,funkDrumIntent,electroDrumIntent, realDrumIntent;
     private Canvas myCanvas;
     public Thread t;
     public float x = 0, y = 0;// 854x480
@@ -76,7 +76,7 @@ public class HomeScreenBitmap extends ImageView implements View.OnTouchListener 
 
             //if funk drum is selected
             if ( x > 45*rx &&  x < 201*rx &&  y > 90*ry &&  y < 247*ry) {
-                x = rx * 121;
+                x = rx * 123;
                 y = 170 * ry;
                 this.setVisibility(View.VISIBLE);
                 final Bitmap currentBitmap;
@@ -117,15 +117,15 @@ public class HomeScreenBitmap extends ImageView implements View.OnTouchListener 
 
             //if real drum is selected
             else if (x >= 650*rx && x < 806*rx && y > 87*ry && y < 250*ry) {
-                x = 730 * rx;
+                x = 728 * rx;
                 y = 169 * ry;
                 final Bitmap currentBitmap;
                 currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.realbutton);
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
-                /*i4=new Intent(getContext(),MainActivity2.class);
-                getContext().startActivity(i4);*/
+                realDrumIntent = new Intent(getContext(),RealDrums.class);
+                getContext().startActivity(realDrumIntent);
             }
 
             myHandler.postDelayed(new Runnable() {

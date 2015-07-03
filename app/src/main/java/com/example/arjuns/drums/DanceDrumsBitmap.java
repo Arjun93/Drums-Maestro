@@ -72,6 +72,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
     protected void onDraw(Canvas c) {
         DanceDrumsBitmap.this.myCanvas = c;
         if (touched == 1) {
+
             // left with pedal
             if ( x > 10*rx && x <= 149*rx &&  y >= 203*ry &&  y < 346*ry) {
                 x = 110 * rx;
@@ -215,6 +216,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 homeScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().getApplicationContext().startActivity(homeScreenIntent);
             }
+
             myHandler.postDelayed(new Runnable() {
                 public void run() {
                     DanceDrumsBitmap.this.setVisibility(View.INVISIBLE);

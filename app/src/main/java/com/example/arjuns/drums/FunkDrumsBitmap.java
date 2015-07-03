@@ -71,8 +71,9 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
     protected void onDraw(Canvas c) {
         FunkDrumsBitmap.this.myCanvas = c;
         if (touched == 1) {
+
             //left top gold
-            if ( x > 70*rx && x <= 270*rx &&  y >= 123*ry &&  y < 244*ry) {
+            if ( x > 70*rx && x <= 270*rx && y >= 123*ry && y < 244*ry) {
                 x = 186 * rx;
                 y = 164 * ry;
                 this.setVisibility(View.VISIBLE);
@@ -83,8 +84,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
             //left bottom gold with kick
-            else if ( x > 20*rx &&  x < 185*rx &&  y > 265*ry
-                    &&  y < 404*ry) {
+            else if ( x > 20*rx && x < 185*rx && y > 265*ry && y < 404*ry) {
                 x = rx * 99;
                 y = 360 * ry;
                 this.setVisibility(View.VISIBLE);
@@ -95,8 +95,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
             //left circle drum
-            else if (x  >= 193*rx && x  < 294*rx && y > 239*ry
-                    && y  < 345*ry) {
+            else if (x >= 193*rx && x < 294*rx && y > 239*ry && y < 345*ry) {
                 x = 223 * rx;
                 y = 310 * ry;
                 this.setVisibility(View.VISIBLE);
@@ -107,8 +106,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
             //second left drum over big kick
-            else if (x  >= 203*rx && x  < 374*rx && y > 189*ry
-                    && y  < 345*ry) {
+            else if (x >= 203*rx && x < 374*rx && y > 189*ry && y < 345*ry) {
                 x = 343 * rx;
                 y = 260 * ry;
                 this.setVisibility(View.VISIBLE);
@@ -119,8 +117,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
             //white snare below the two left drums
-            else if (x  >= 263*rx && x  < 384*rx && y > 299*ry
-                    && y  < 447*ry) {
+            else if (x >= 263*rx && x < 384*rx && y > 299*ry && y < 447*ry) {
                 x = 323 * rx;
                 y = 395 * ry;
                 this.setVisibility(View.VISIBLE);
@@ -131,8 +128,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
             //middle kick
-            else if (x  >= 413*rx && x  < 484*rx && y > 299*ry
-                    && y  < 447*ry) {
+            else if (x >= 413*rx && x < 484*rx && y > 299*ry && y < 447*ry) {
                 x = 451 * rx;
                 y = 385 * ry;
                 this.setVisibility(View.VISIBLE);
@@ -143,8 +139,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
             //right drum
-            else if (x  >= 513*rx && x  < 624*rx && y > 299*ry
-                    && y  < 447*ry) {
+            else if (x >= 513*rx && x < 624*rx && y > 299*ry && y < 447*ry) {
                 x = 568 * rx;
                 y = 387 * ry;
                 this.setVisibility(View.VISIBLE);
@@ -156,8 +151,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
 
             }
             //right lower gold
-            else if (x  >= 583*rx && x  < 828*rx && y > 299*ry
-                    && y  < 447*ry) {
+            else if (x >= 583*rx && x < 828*rx && y > 299*ry && y < 447*ry) {
                 x = 738 * rx;
                 y = 377 * ry;
                 this.setVisibility(View.VISIBLE);
@@ -168,8 +162,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
             //right top right gold
-            else if (x  >= 683*rx && x  < 828*rx && y > 120*ry
-                    && y  < 280*ry) {
+            else if (x >= 683*rx && x < 828*rx && y > 120*ry && y < 280*ry) {
                 x = 755 * rx;
                 y = 213 * ry;
                 this.setVisibility(View.VISIBLE);
@@ -180,8 +173,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
             //left top gold
-            else if (x  >= 503*rx && x  < 728*rx && y > 120*ry
-                    && y  < 280*ry) {
+            else if (x >= 503*rx && x < 728*rx && y > 120*ry && y < 280*ry) {
                 x = 587 * rx;
                 y = 227 * ry;
                 this.setVisibility(View.VISIBLE);
@@ -193,10 +185,10 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
             //back button
-            else if(x>750*rx&&x<841*rx&&y>0*ry&&y<58*ry)
+            else if(x > 750*rx && x <841*rx && y > 0*ry && y < 58*ry)
             {
-                x=rx*795;
-                y=ry*27;
+                x = rx * 795;
+                y = ry * 27;
                 this.setVisibility(View.VISIBLE);
                 this.setVisibility(View.VISIBLE);
                 final Bitmap currentBitmap;
