@@ -16,9 +16,8 @@ import android.widget.Toast;
 /**
  * Created by arjuns on 7/3/2015.
  */
-public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener {
+public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
     public Context myContext;
-    public Intent homeScreenIntent;
     private Canvas myCanvas;
     public float x = 0, y = 0;// 854x480
     public float rx;
@@ -26,8 +25,9 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
     private Handler myHandler;
     private final int FRAME_RATE = 30;
     private int touched = 0;
+    Intent homeScreenIntent;
 
-    public DanceDrumsBitmap(Context context, AttributeSet a) {
+    public FunkDrumsBitmap(Context context, AttributeSet a) {
         super(context, a);
         myContext = context;
         myHandler = new Handler();
@@ -43,7 +43,6 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
     }
 
     private Runnable r = new Runnable() {
-
         public void run() {
             invalidate();
         }
@@ -60,7 +59,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
     public boolean onTouch(View v, MotionEvent event) {
         myHandler.post(new Runnable() {
             public void run() {
-                DanceDrumsBitmap.this.setVisibility(View.VISIBLE);
+                FunkDrumsBitmap.this.setVisibility(View.VISIBLE);
             }
         });
         x = event.getX();
@@ -70,141 +69,135 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
     }
 
     protected void onDraw(Canvas c) {
-        DanceDrumsBitmap.this.myCanvas = c;
+        FunkDrumsBitmap.this.myCanvas = c;
         if (touched == 1) {
-            // left with pedal
-            if ( x > 10*rx && x <= 149*rx &&  y >= 203*ry &&  y < 346*ry) {
-                x = 110 * rx;
-                y = 345 * ry;
-                this.setVisibility(View.VISIBLE);
-                final Bitmap currentBitmap;
-                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.dance5);
-                Bitmap scaledBitmap=resizeImage(currentBitmap);
-                myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
-                        / 2, y - scaledBitmap.getHeight() / 2, null);
-            }
-
-            //left white
-            else if ( x > 187*rx &&  x < 345*rx &&  y > 323*ry
-                    &&  y < 445*ry) {
-                x = rx * 265;
-                y = 369 * ry;
-                this.setVisibility(View.VISIBLE);
-                final Bitmap currentBitmap;
-                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.dance7);
-                Bitmap scaledBitmap=resizeImage(currentBitmap);
-                myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
-                        / 2, y - scaledBitmap.getHeight() / 2, null);
-            }
-
             //left top gold
-            else if ( x > 30*rx &&  x < 272*rx &&  y > 104*ry
-                    &&  y < 255*ry) {
-                x = 161 * rx;
-                y = 168 * ry;
+            if ( x > 70*rx && x <= 270*rx &&  y >= 123*ry &&  y < 244*ry) {
+                x = 186 * rx;
+                y = 164 * ry;
                 this.setVisibility(View.VISIBLE);
                 final Bitmap currentBitmap;
-                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.dance2);
+                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.funk1);
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
-
-            //right top gold
-            else if ( x > 565*rx &&  x < 758*rx &&  y > 75*ry
-                    &&  y < 265*ry) {
-                x = 637 * rx;
-                y = 165 * ry;
+            //left bottom gold with kick
+            else if ( x > 20*rx &&  x < 185*rx &&  y > 265*ry
+                    &&  y < 404*ry) {
+                x = rx * 99;
+                y = 360 * ry;
                 this.setVisibility(View.VISIBLE);
                 final Bitmap currentBitmap;
-                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.dance3);
+                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.funk2);
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
-
-            //middle pedal
-            else if (x  >= 380*rx && x  < 420 *rx&& y  > 314*ry
-                    && y  < 425*ry) {
-                x = 397 * rx;
-                y = 339 * ry;
-                this.setVisibility(View.VISIBLE);
-                final Bitmap currentBitmap;
-                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.dance6);
-                Bitmap scaledBitmap=resizeImage(currentBitmap);
-                myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
-                        / 2, y - scaledBitmap.getHeight() / 2, null);
-            }
-
-            //right bottom gold
-            else if ( x >= 613*rx &&  x < 830*rx && y  > 239*ry&&  y < 355*ry) {
-                x = 733 * rx;
-                y = 279 * ry;
-                this.setVisibility(View.VISIBLE);
-                final Bitmap currentBitmap;
-                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.dance4);
-                Bitmap scaledBitmap=resizeImage(currentBitmap);
-                myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
-                        / 2, y - scaledBitmap.getHeight() / 2, null);
-            }
-
-            //center right drum
-            else if ( x >= 387*rx &&  x < 558*rx &&  y > 208*ry
-                    &&  y < 318*ry) {
-                x = 489 * rx;
-                y = 257 * ry;
-                this.setVisibility(View.VISIBLE);
-                final Bitmap currentBitmap;
-                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.dance9);
-                Bitmap scaledBitmap=resizeImage(currentBitmap);
-                myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
-                        / 2, y - scaledBitmap.getHeight() / 2, null);
-            }
-
-            //center left drum
-            else if (x  >= 223*rx && x  < 344*rx && y > 239*ry
+            //left circle drum
+            else if (x  >= 193*rx && x  < 294*rx && y > 239*ry
                     && y  < 345*ry) {
-                x = 298 * rx;
-                y = 255 * ry;
+                x = 223 * rx;
+                y = 310 * ry;
                 this.setVisibility(View.VISIBLE);
                 final Bitmap currentBitmap;
-                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.dance10);
+                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.funk3);
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
-
-            //right lower drum
-            else if ( x >= 507*rx &&  x < 728*rx &&  y > 298*ry
-                    &&  y < 450*ry) {
-                x = 598 * rx;
-                y = 389 * ry;
+            //second left drum over big kick
+            else if (x  >= 203*rx && x  < 374*rx && y > 189*ry
+                    && y  < 345*ry) {
+                x = 343 * rx;
+                y = 260 * ry;
                 this.setVisibility(View.VISIBLE);
                 final Bitmap currentBitmap;
-                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.dance8);
+                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.funk4);
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
-
-            //center gold
-            else if (x  >= 337*rx && x  < 473*rx && y > 80*ry
-                    && y  < 160*ry) {
-                x = 393 * rx;
-                y = 119 * ry;
+            //white snare below the two left drums
+            else if (x  >= 263*rx && x  < 384*rx && y > 299*ry
+                    && y  < 447*ry) {
+                x = 323 * rx;
+                y = 395 * ry;
                 this.setVisibility(View.VISIBLE);
                 final Bitmap currentBitmap;
-                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.dance1);
+                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.funk5);
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
             }
+            //middle kick
+            else if (x  >= 413*rx && x  < 484*rx && y > 299*ry
+                    && y  < 447*ry) {
+                x = 451 * rx;
+                y = 385 * ry;
+                this.setVisibility(View.VISIBLE);
+                final Bitmap currentBitmap;
+                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.funk6);
+                Bitmap scaledBitmap=resizeImage(currentBitmap);
+                myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
+                        / 2, y - scaledBitmap.getHeight() / 2, null);
+            }
+            //right drum
+            else if (x  >= 513*rx && x  < 624*rx && y > 299*ry
+                    && y  < 447*ry) {
+                x = 568 * rx;
+                y = 387 * ry;
+                this.setVisibility(View.VISIBLE);
+                final Bitmap currentBitmap;
+                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.funk10);
+                Bitmap scaledBitmap=resizeImage(currentBitmap);
+                myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
+                        / 2, y - scaledBitmap.getHeight() / 2, null);
 
+            }
+            //right lower gold
+            else if (x  >= 583*rx && x  < 828*rx && y > 299*ry
+                    && y  < 447*ry) {
+                x = 738 * rx;
+                y = 377 * ry;
+                this.setVisibility(View.VISIBLE);
+                final Bitmap currentBitmap;
+                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.funk9);
+                Bitmap scaledBitmap=resizeImage(currentBitmap);
+                myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
+                        / 2, y - scaledBitmap.getHeight() / 2, null);
+            }
+            //right top right gold
+            else if (x  >= 683*rx && x  < 828*rx && y > 120*ry
+                    && y  < 280*ry) {
+                x = 755 * rx;
+                y = 213 * ry;
+                this.setVisibility(View.VISIBLE);
+                final Bitmap currentBitmap;
+                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.funk7);
+                Bitmap scaledBitmap=resizeImage(currentBitmap);
+                myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
+                        / 2, y - scaledBitmap.getHeight() / 2, null);
+            }
+            //left top gold
+            else if (x  >= 503*rx && x  < 728*rx && y > 120*ry
+                    && y  < 280*ry) {
+                x = 587 * rx;
+                y = 227 * ry;
+                this.setVisibility(View.VISIBLE);
+                this.setVisibility(View.VISIBLE);
+                final Bitmap currentBitmap;
+                currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.funk8);
+                Bitmap scaledBitmap=resizeImage(currentBitmap);
+                myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
+                        / 2, y - scaledBitmap.getHeight() / 2, null);
+            }
             //back button
             else if(x>750*rx&&x<841*rx&&y>0*ry&&y<58*ry)
             {
                 x=rx*795;
                 y=ry*27;
+                this.setVisibility(View.VISIBLE);
                 this.setVisibility(View.VISIBLE);
                 final Bitmap currentBitmap;
                 currentBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.back);
@@ -215,9 +208,10 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 homeScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().getApplicationContext().startActivity(homeScreenIntent);
             }
+
             myHandler.postDelayed(new Runnable() {
                 public void run() {
-                    DanceDrumsBitmap.this.setVisibility(View.INVISIBLE);
+                    FunkDrumsBitmap.this.setVisibility(View.INVISIBLE);
                 }
             }, 150);
             touched = 0;

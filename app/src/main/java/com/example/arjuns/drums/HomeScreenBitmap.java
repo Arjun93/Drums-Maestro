@@ -17,7 +17,7 @@ import android.widget.ImageView;
  */
 public class HomeScreenBitmap extends ImageView implements View.OnTouchListener {
     public Context mycontext;
-    public Intent danceDrumIntent,i2,i3,i4;
+    public Intent danceDrumIntent,funkDrumIntent,i3,i4;
     private Canvas myCanvas;
     public Thread t;
     public float x = 0, y = 0;// 854x480
@@ -84,8 +84,8 @@ public class HomeScreenBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
-                /*i1 = new Intent(getContext(),MainActivity4.class);
-                getContext().startActivity(i1);*/
+                 funkDrumIntent= new Intent(getContext(),FunkDrums.class);
+                getContext().startActivity(funkDrumIntent);
             }
 
             //if dance drum is selected
