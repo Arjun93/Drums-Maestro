@@ -17,7 +17,7 @@ import android.widget.ImageView;
  */
 public class HomeScreenBitmap extends ImageView implements View.OnTouchListener {
     public Context mycontext;
-    public Intent i1,i2,i3,i4;
+    public Intent danceDrumIntent,i2,i3,i4;
     private Canvas myCanvas;
     public Thread t;
     public float x = 0, y = 0;// 854x480
@@ -26,16 +26,12 @@ public class HomeScreenBitmap extends ImageView implements View.OnTouchListener 
     private Handler myHandler;
     private final int FRAME_RATE = 30;
     private int touched = 0;
-    BitmapDrawable b1,b2,b3,b4;
+
 
     public HomeScreenBitmap(Context context, AttributeSet a) {
         super(context, a);
         mycontext = context;
         myHandler = new Handler();
-        b1 = (BitmapDrawable) getContext().getResources().getDrawable(R.drawable.funkbutton);
-        b2 = (BitmapDrawable) getContext().getResources().getDrawable(R.drawable.dancebutton);
-        b3 = (BitmapDrawable) getContext().getResources().getDrawable(R.drawable.electrobutton);
-        b4 = (BitmapDrawable) getContext().getResources().getDrawable(R.drawable.realbutton);
     }
 
     private Runnable r = new Runnable() {
@@ -77,6 +73,7 @@ public class HomeScreenBitmap extends ImageView implements View.OnTouchListener 
     protected void onDraw(Canvas c) {
         HomeScreenBitmap.this.myCanvas = c;
         if (touched == 1) {
+
             //if funk drum is selected
             if ( x > 45*rx &&  x < 201*rx &&  y > 90*ry &&  y < 247*ry) {
                 x = rx * 121;
@@ -90,6 +87,7 @@ public class HomeScreenBitmap extends ImageView implements View.OnTouchListener 
                 /*i1 = new Intent(getContext(),MainActivity4.class);
                 getContext().startActivity(i1);*/
             }
+
             //if dance drum is selected
             else if (x  >= 240*rx && x  < 394*rx && y > 49*ry && y  < 208*ry) {
                 x = 317 * rx;
@@ -100,9 +98,10 @@ public class HomeScreenBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
-                /*i2 = new Intent(getContext(),MainActivity3.class);
-                getContext().startActivity(i2);*/
+                danceDrumIntent = new Intent(getContext(),DanceDrums.class);
+                getContext().startActivity(danceDrumIntent);
             }
+
             //if electro drum is selected
             else if (x >= 454*rx && x < 611*rx && y > 49*ry && y < 208*ry) {
                 x = 532 * rx;
@@ -115,6 +114,7 @@ public class HomeScreenBitmap extends ImageView implements View.OnTouchListener 
                 /*i3=new Intent(getContext(),MainActivity.class);
                 getContext().startActivity(i3);*/
             }
+
             //if real drum is selected
             else if (x >= 650*rx && x < 806*rx && y > 87*ry && y < 250*ry) {
                 x = 730 * rx;
@@ -139,8 +139,6 @@ public class HomeScreenBitmap extends ImageView implements View.OnTouchListener 
 
         this.setOnTouchListener(this);
         myHandler.postDelayed(r, FRAME_RATE);
-        // abc.drawColor(Color.TRANSPARENT);
-
     }
 }
 
