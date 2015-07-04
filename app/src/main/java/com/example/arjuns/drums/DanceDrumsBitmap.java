@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -26,11 +28,22 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
     private Handler myHandler;
     private final int FRAME_RATE = 30;
     private int touched = 0;
+    int[] soundId;
+    public SoundPool mySoundPool;
+
+    AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+    float actualVolume = (float) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+    float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+    float volume = actualVolume / maxVolume;
+
 
     public DanceDrumsBitmap(Context context, AttributeSet a) {
         super(context, a);
         myContext = context;
         myHandler = new Handler();
+        mySoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        soundId = new int[26];
+        loadSounds();
     }
 
     public Bitmap resizeImage(Bitmap image) {
@@ -40,6 +53,19 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
         imageWidth=image.getWidth()*rx;
         resized=Bitmap.createScaledBitmap(image, (int) imageWidth, (int)imageHeight, true);
         return resized;
+    }
+
+    public void loadSounds() {
+        soundId[0] = mySoundPool.load(getContext(), R.raw.dance_crash, 1);
+        soundId[1] = mySoundPool.load(getContext(), R.raw.dance_clap, 1);
+        soundId[2] = mySoundPool.load(getContext(), R.raw.dance_hihat, 1);
+        soundId[3] = mySoundPool.load(getContext(), R.raw.dance_ride, 1);
+        soundId[4] = mySoundPool.load(getContext(), R.raw.dance_ride2, 1);
+        soundId[5] = mySoundPool.load(getContext(), R.raw.dance_snare, 1);
+        soundId[6] = mySoundPool.load(getContext(), R.raw.dance_tom1, 1);
+        soundId[7] = mySoundPool.load(getContext(), R.raw.dance_tom2, 1);
+        soundId[8] = mySoundPool.load(getContext(), R.raw.dance_tom3, 1);
+        soundId[9] = mySoundPool.load(getContext(), R.raw.dancekick, 1);
     }
 
     private Runnable r = new Runnable() {
@@ -83,6 +109,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[2], volume, volume, 1, 0 , 1f);
             }
 
             //left white
@@ -96,6 +123,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[5], volume, volume, 1, 0, 1f);
             }
 
             //left top gold
@@ -109,6 +137,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[0], volume, volume, 1, 0 , 1f);
             }
 
             //right top gold
@@ -122,6 +151,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[3], volume, volume, 1, 0 , 1f);
             }
 
             //middle pedal
@@ -135,6 +165,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[9], volume, volume, 1, 0 , 1f);
             }
 
             //right bottom gold
@@ -147,6 +178,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[1], volume, volume, 1, 0 , 1f);
             }
 
             //center right drum
@@ -160,6 +192,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[7], volume, volume, 1, 0 , 1f);
             }
 
             //center left drum
@@ -173,6 +206,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[6], volume, volume, 1, 0 , 1f);
             }
 
             //right lower drum
@@ -186,6 +220,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[8], volume, volume, 1, 0 , 1f);
             }
 
             //center gold
@@ -199,6 +234,7 @@ public class DanceDrumsBitmap extends ImageView implements View.OnTouchListener 
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[4], volume, volume, 1, 0 , 1f);
             }
 
             //back button

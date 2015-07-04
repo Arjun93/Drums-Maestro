@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -26,12 +28,36 @@ public class ElectroDrumsBitmap extends ImageView implements View.OnTouchListene
     private Handler myHandler;
     private final int FRAME_RATE = 30;
     private int touched = 0;
+    int[] soundId;
+    public SoundPool mySoundPool;
+
+    AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+    float actualVolume = (float) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+    float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+    float volume = actualVolume / maxVolume;
+
 
     public ElectroDrumsBitmap(Context context, AttributeSet a) {
         super(context, a);
         myContext = context;
         myHandler = new Handler();
+        mySoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        soundId = new int[10];
+        loadSounds();
     }
+
+    public void loadSounds() {
+        soundId[0] = mySoundPool.load(getContext(), R.raw.elec_crash1, 1);
+        soundId[1] = mySoundPool.load(getContext(), R.raw.elec_crash2, 1);
+        soundId[2] = mySoundPool.load(getContext(), R.raw.elec_hihatdown, 1);
+        soundId[3] = mySoundPool.load(getContext(), R.raw.elec_kick, 1);
+        soundId[4] = mySoundPool.load(getContext(), R.raw.elec_ride1, 1);
+        soundId[5] = mySoundPool.load(getContext(), R.raw.elec_ride2, 1);
+        soundId[6] = mySoundPool.load(getContext(), R.raw.elec_snare, 1);
+        soundId[7] = mySoundPool.load(getContext(), R.raw.elec_tom1, 1);
+        soundId[8] = mySoundPool.load(getContext(), R.raw.elec_tom2, 1);
+        soundId[9] = mySoundPool.load(getContext(), R.raw.elec_tom3, 1);
+        }
 
     public Bitmap resizeImage(Bitmap image) {
         Bitmap resized;
@@ -85,6 +111,7 @@ public class ElectroDrumsBitmap extends ImageView implements View.OnTouchListene
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[1], volume, volume, 1, 0 , 1f);
             }
 
             //left gold with kick
@@ -97,6 +124,7 @@ public class ElectroDrumsBitmap extends ImageView implements View.OnTouchListene
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[2], volume, volume, 1, 0 , 1f);
             }
 
             // left gold - KICK PORTION
@@ -109,6 +137,7 @@ public class ElectroDrumsBitmap extends ImageView implements View.OnTouchListene
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[2], volume, volume, 1, 0 , 1f);
             }
 
             //left top gold
@@ -121,6 +150,7 @@ public class ElectroDrumsBitmap extends ImageView implements View.OnTouchListene
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[0], volume, volume, 1, 0 , 1f);
             }
 
             // right bottom gold
@@ -134,6 +164,7 @@ public class ElectroDrumsBitmap extends ImageView implements View.OnTouchListene
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[4], volume, volume, 1, 0 , 1f);
                 //Toast.makeText(getContext().getApplicationContext(),"hi",Toast.LENGTH_SHORT).show();
             }
 
@@ -147,6 +178,7 @@ public class ElectroDrumsBitmap extends ImageView implements View.OnTouchListene
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[9], volume, volume, 1, 0 , 1f);
             }
 
             //right top gold
@@ -173,6 +205,7 @@ public class ElectroDrumsBitmap extends ImageView implements View.OnTouchListene
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[3], volume, volume, 1, 0 , 1f);
             }
 
             //white snare
@@ -185,6 +218,7 @@ public class ElectroDrumsBitmap extends ImageView implements View.OnTouchListene
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[6], volume, volume, 1, 0 , 1f);
             }
 
             //left small drum
@@ -197,6 +231,7 @@ public class ElectroDrumsBitmap extends ImageView implements View.OnTouchListene
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[7], volume, volume, 1, 0 , 1f);
             }
 
             //left second small drum
@@ -209,6 +244,7 @@ public class ElectroDrumsBitmap extends ImageView implements View.OnTouchListene
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[8], volume, volume, 1, 0 , 1f);
             }
 
             //back

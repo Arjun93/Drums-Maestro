@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -26,11 +28,36 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
     private final int FRAME_RATE = 30;
     private int touched = 0;
     Intent homeScreenIntent;
+    int[] soundId;
+    public SoundPool mySoundPool;
+
+    AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+    float actualVolume = (float) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+    float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+    float volume = actualVolume / maxVolume;
+
 
     public FunkDrumsBitmap(Context context, AttributeSet a) {
         super(context, a);
         myContext = context;
         myHandler = new Handler();
+        mySoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        soundId = new int[11];
+        loadSounds();
+    }
+
+    public void loadSounds() {
+        soundId[0] = mySoundPool.load(getContext(), R.raw.funk_crash, 1);
+        soundId[1] = mySoundPool.load(getContext(), R.raw.funk_crash2, 1);
+        soundId[2] = mySoundPool.load(getContext(), R.raw.funk_crash3, 1);
+        soundId[3] = mySoundPool.load(getContext(), R.raw.funk_hihat, 1);
+        soundId[4] = mySoundPool.load(getContext(), R.raw.funk_hihatt, 1);
+        soundId[5] = mySoundPool.load(getContext(), R.raw.funk_kick, 1);
+        soundId[6] = mySoundPool.load(getContext(), R.raw.funk_ride, 1);
+        soundId[7] = mySoundPool.load(getContext(), R.raw.funk_snare, 1);
+        soundId[8] = mySoundPool.load(getContext(), R.raw.funk_tom1, 1);
+        soundId[9] = mySoundPool.load(getContext(), R.raw.funk_tom2, 1);
+        soundId[10] = mySoundPool.load(getContext(), R.raw.funk_tom3, 1);
     }
 
     public Bitmap resizeImage(Bitmap image) {
@@ -82,6 +109,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[6], volume, volume, 1, 0 , 1f);
             }
             //left bottom gold with kick
             else if ( x > 20*rx && x < 185*rx && y > 265*ry && y < 404*ry) {
@@ -93,6 +121,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[3], volume, volume, 1, 0 , 1f);
             }
             //left circle drum
             else if (x >= 193*rx && x < 294*rx && y > 239*ry && y < 345*ry) {
@@ -104,6 +133,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[8], volume, volume, 1, 0 , 1f);
             }
             //second left drum over big kick
             else if (x >= 203*rx && x < 374*rx && y > 189*ry && y < 345*ry) {
@@ -115,6 +145,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[9], volume, volume, 1, 0 , 1f);
             }
             //white snare below the two left drums
             else if (x >= 263*rx && x < 384*rx && y > 299*ry && y < 447*ry) {
@@ -126,6 +157,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[7], volume, volume, 1, 0 , 1f);
             }
             //middle kick
             else if (x >= 413*rx && x < 484*rx && y > 299*ry && y < 447*ry) {
@@ -137,6 +169,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[5], volume, volume, 1, 0, 1f);
             }
             //right drum
             else if (x >= 513*rx && x < 624*rx && y > 299*ry && y < 447*ry) {
@@ -148,7 +181,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
-
+                mySoundPool.play(soundId[10], volume, volume, 1, 0 , 1f);
             }
             //right lower gold
             else if (x >= 583*rx && x < 828*rx && y > 299*ry && y < 447*ry) {
@@ -160,6 +193,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[2], volume, volume, 1, 0 , 1f);
             }
             //right top right gold
             else if (x >= 683*rx && x < 828*rx && y > 120*ry && y < 280*ry) {
@@ -171,6 +205,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[0], volume, volume, 1, 0 , 1f);
             }
             //left top gold
             else if (x >= 503*rx && x < 728*rx && y > 120*ry && y < 280*ry) {
@@ -183,6 +218,7 @@ public class FunkDrumsBitmap extends ImageView implements View.OnTouchListener {
                 Bitmap scaledBitmap=resizeImage(currentBitmap);
                 myCanvas.drawBitmap(scaledBitmap, x - scaledBitmap.getWidth()
                         / 2, y - scaledBitmap.getHeight() / 2, null);
+                mySoundPool.play(soundId[6], volume, volume, 1, 0 , 1f);
             }
             //back button
             else if(x > 750*rx && x <841*rx && y > 0*ry && y < 58*ry)
